@@ -10,4 +10,4 @@ if __name__ == '__main__':
     benchmark_type = os.getenv('BENCHMARK_TYPE')
     script_name = os.getenv('SCRIPT_NAME')
 
-    subprocess.call([os.path.join(base_dir, benchmark_type.lower(), script_name.lower()+'.py')] + sys.argv[1:])
+    subprocess.call([os.path.join(base_dir, 'madrob_beast_pi', benchmark_type.lower(), script_name.lower()+'.py')] + sys.argv[1:])
