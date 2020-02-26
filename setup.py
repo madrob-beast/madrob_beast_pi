@@ -20,9 +20,9 @@ setuptools.setup(
     ],
     python_requires='>=2.7.12',
     install_requires=[
-        'pyyaml',
-        'numpy>=1.16.6',
-        'pandas',
-        'scipy'
+        'pyyaml==5.3',
+        'numpy==1.16.6',
+        'pandas==0.23.1',
+        'scipy==0.16'
     ]
 )
