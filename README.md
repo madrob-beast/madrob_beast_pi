@@ -22,10 +22,11 @@ docker build --build-arg BENCHMARK_TYPE=madrob --build-arg PI_NAME=execution_tim
 This creates an image named `madrob_execution_time`. (The `make_docker_images.py` script can create all required images, as mentioned below).
 
 If we run a container from this image and call the `run_pi` command, 
-the Performance Indicator will be run:
+the Performance Indicator will be run.
+
+Assuming `test_data/` contains input data, and the output directory `out_folder/` exists:
 ```
-docker run --name madrob_execution_time -dit madrob_execution_time
-docker exec -it madrob_execution_time run_pi madrob_beast_pi/test_data/events_sequence.csv madrob_beast_pi/test_data/testbed_config.yaml .
+docker run --rm -v $PWD/test_data:/in -v $PWD/out_folder:/out madrob_execution_time run_pi /in/events_sequence.csv /in/testbed_config.yaml /out
 ```
 
 ## Creating all Docker images
