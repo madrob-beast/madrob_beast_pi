@@ -7,7 +7,7 @@ Scripts to calculate performance indicators for the MADROB and BEAST benchmarks,
 Pip can be used to install this module locally:
 ```
 git clone https://github.com/madrob-beast/madrob_beast_pi.git
-python -m pip install madrob_beast_pi/
+python -m pip install src/madrob_beast_pi/
 ```
 
 **Note**: When adding or modifying Performance Indicators, run the installation command again. To keep the PIs up-to-date, run `git pull` and the installation command.
@@ -26,15 +26,16 @@ the Performance Indicator will be run.
 
 Assuming `test_data/` contains input data, and the output directory `out_folder/` exists:
 ```
-docker run --rm -v $PWD/test_data:/in -v $PWD/out_folder:/out madrob_execution_time run_pi /in/events_sequence.csv /in/testbed_config.yaml /out
+docker run --rm -v $PWD/test_data:/in -v $PWD/out_folder:/out madrob_execution_time ./run_pi /in/events_sequence.csv /in/testbed_config.yaml /out
 ```
 
 ## Creating all Docker images
 
-The script `make_docker_images.py` builds Docker images for all the Performance Indicators in the 'madrob' and 'beast' directories. **Note**: the Dockerfile clones the code from this repo. So when adding a new PI test it locally first, then push it to the repository, and then run the script:
+The script `make_docker_images.py` builds Docker images for all the Performance Indicators in the 'madrob' and 'beast' directories:
 ```
 python make_docker_images.py
 ```
+**Note**: The script runs `"sudo docker ..."`. To run docker in user mode, modify the script.
 
 ## Test data
 

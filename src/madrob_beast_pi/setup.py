@@ -1,16 +1,11 @@
 import setuptools
 
-with open('README.md', 'r') as fh:
-    long_description = fh.read()
-
 setuptools.setup(
     name='madrob_beast_pi',
     version='0.1.0',
     author='João Pereira',
     author_email='95joaopereira@gmail.com',
     description='Performance indicators for the MADROB and BEAST benchmarks',
-    long_description=long_description,
-    long_description_content_type='text/markdown',
     url='https://github.com/joaomacp/madrob_beast_pi',
     packages=setuptools.find_packages(),
     classifiers=[
