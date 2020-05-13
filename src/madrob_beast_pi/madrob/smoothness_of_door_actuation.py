@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 
 
-def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir, start_time):
+def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time):
 
     # Load csv as pandas DataFrame
     df = pd.read_csv(preprocessed_filenames_dict['door_angular_acceleration'], skipinitialspace=True)
@@ -20,12 +20,14 @@ def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir,
 
     # Compute result (note: the values in a are broadcasted, see google.com/search?q=numpy+broadcasting)
     smoothness_of_door_actuation = float(1. / np.sqrt(np.sum(a ** 2)))
-    print 'smoothness_of_door_actuation', smoothness_of_door_actuation, 's²/rad'
 
     # Write result yaml file
     filepath = path.join(output_dir, 'smoothness_of_door_actuation_%s.yaml' % (start_time.strftime('%Y%m%d_%H%M%S')))
     with open(filepath, 'w+') as result_file:
-        yaml.dump({'smoothness_of_door_actuation': smoothness_of_door_actuation}, result_file, default_flow_style=False)
+        yaml.dump({
+            'type': 'scalar',
+            'value': smoothness_of_door_actuation,
+        }, result_file, default_flow_style=False)
 
 
 if __name__ == '__main__':

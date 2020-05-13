@@ -25,7 +25,10 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
     # Write result yaml file
     filepath = path.join(output_dir, 'time_to_handle_%s.yaml' % (start_time.strftime('%Y%m%d_%H%M%S')))
     with open(filepath, 'w+') as result_file:
-        yaml.dump({'time_to_handle': time_to_handle}, result_file, default_flow_style=False)
+        yaml.dump({
+            'type': 'scalar',
+            'value': time_to_handle,
+        }, result_file, default_flow_style=False)
 
 
 if __name__ == '__main__':

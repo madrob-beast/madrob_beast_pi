@@ -19,12 +19,15 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
         if index > 0:
             force_delta_sum += abs(row['handle_force'] - force_df.loc[index-1, 'handle_force']) / (row['timestamp'] - force_df.loc[index-1, 'timestamp'])
 
-    smoothness = 10000 / (force_delta_sum/len(force_df)) # Higher smoothness = lower force deltas
+    smoothness = 10000 / (force_delta_sum/len(force_df))  # Higher smoothness = lower force deltas
 
     # Write result yaml file
     filepath = path.join(output_dir, 'door_handle_smoothness_%s.yaml' % (start_time.strftime('%Y%m%d_%H%M%S')))
     with open(filepath, 'w+') as result_file:
-        yaml.dump({'door_handle_smoothness': float(smoothness)}, result_file, default_flow_style=False)
+        yaml.dump({
+            'type': 'scalar',
+            'value': float(smoothness),
+        }, result_file, default_flow_style=False)
 
 
 if __name__ == '__main__':

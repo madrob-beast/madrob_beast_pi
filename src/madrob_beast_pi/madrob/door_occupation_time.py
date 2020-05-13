@@ -39,7 +39,10 @@ def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir,
     # Write result yaml file
     filepath = path.join(output_dir, 'door_occupation_time_%s.yaml' % (start_time.strftime('%Y%m%d_%H%M%S')))
     with open(filepath, 'w+') as result_file:
-        yaml.dump({'door_occupation_time': door_occupation_time}, result_file, default_flow_style=False)
+        yaml.dump({
+            'type': 'scalar',
+            'value': door_occupation_time,
+        }, result_file, default_flow_style=False)
 
 
 if __name__ == '__main__':
@@ -52,6 +55,6 @@ if __name__ == '__main__':
     events_sequence_path, testbed_conf_path, output_folder_path = argv[1:]
 
     with open(testbed_conf_path, 'r') as testbed_conf_file:
-        testbed_conf = yaml.load(testbed_conf_file)
+        testbed_conf_dict = yaml.load(testbed_conf_file)
 
-    performance_indicator({'events_sequence': events_sequence_path}, testbed_conf, output_folder_path, datetime.now())
+    performance_indicator({'events_sequence': events_sequence_path}, testbed_conf_dict, output_folder_path, datetime.now())
