@@ -9,7 +9,6 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 from scipy.signal import iirfilter, lfilter
-import matplotlib.pyplot as plt
 
 
 def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time):
@@ -40,12 +39,14 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
 
     # Compute result (note: the values in a are broadcasted, see google.com/search?q=numpy+broadcasting)
     unsafety_of_door_operation = float(np.max(np.abs(a)))
-    print 'unsafety_of_door_operation', unsafety_of_door_operation, 'rad/s²'
 
     # Write result yaml file
     filepath = path.join(output_dir, 'unsafety_of_door_operation_%s.yaml' % (start_time.strftime('%Y%m%d_%H%M%S')))
     with open(filepath, 'w+') as result_file:
-        yaml.dump({'unsafety_of_door_operation': unsafety_of_door_operation}, result_file, default_flow_style=False)
+        yaml.dump({
+            'type': 'scalar',
+            'value': unsafety_of_door_operation,
+        }, result_file, default_flow_style=False)
 
 
 if __name__ == '__main__':
