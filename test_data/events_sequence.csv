@@ -1,9 +1,0 @@
-timestamp,events_sequence
-1580487388.24, benchmark_start
-1580487390.202296469, handle_is_touched
-1580487396.141292209, door_opens
-1580487400.15742929, humanoid_approaches_the_door_on_ccw_side
-1580487403.240972900, humanoid_moves_to_cw_side
-1580487404.42149175, door_closes
-1580487404.181830900, door_opens
-1580487405.681779242, door_closes

@@ -13,10 +13,10 @@ import numpy as np
 def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time):
 
     # Load csv as pandas DataFrame
-    df = pd.read_csv(preprocessed_filenames_dict['handle_force'], skipinitialspace=True)
+    df = pd.read_csv(preprocessed_filenames_dict['wrench'], skipinitialspace=True)
 
     # Handle force timeseries
-    f = df['handle_force']
+    f = df['force_x']
 
     # Compute result (note: the values in f are broadcasted, see google.com/search?q=numpy+broadcasting)
     roughness_of_door_actuation = float(np.max(np.abs(f)))
@@ -34,8 +34,8 @@ if __name__ == '__main__':
     arg_len = 3
     script_name = 'roughness_of_door_actuation'
     if len(argv) != arg_len:
-        print "[Performance Indicator {script_name}] Error: arguments must be {script_name}.py handle_force.csv output_dir".format(script_name=script_name)
+        print "[Performance Indicator {script_name}] Error: arguments must be {script_name}.py wrench.csv output_dir".format(script_name=script_name)
         exit(-1)
 
-    handle_force_path, output_folder_path = argv[1:]
-    performance_indicator({'handle_force': handle_force_path}, None, output_folder_path, datetime.now())
+    wrench_path, output_folder_path = argv[1:]
+    performance_indicator({'wrench': wrench_path}, None, output_folder_path, datetime.now())
