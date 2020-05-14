@@ -26,7 +26,7 @@ the Performance Indicator will be run.
 
 Assuming `test_data/` contains input data, and the output directory `out_folder/` exists:
 ```
-docker run --rm -v $PWD/test_data:/in -v $PWD/out_folder:/out madrob_execution_time ./run_pi /in/events_sequence.csv /in/testbed_config.yaml /out
+docker run --rm -v $PWD/test_data:/in -v $PWD/out_folder:/out madrob_execution_time ./run_pi /in/events.csv /in/testbed_config.yaml /out
 ```
 
 ## Creating all Docker images
