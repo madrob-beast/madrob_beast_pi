@@ -7,6 +7,7 @@ Scripts to calculate performance indicators for the MADROB and BEAST benchmarks,
 Pip can be used to install this module locally:
 ```
 git clone https://github.com/madrob-beast/madrob_beast_pi.git
+cd madrob_beast_pi
 python -m pip install src/madrob_beast_pi/
 ```
 
