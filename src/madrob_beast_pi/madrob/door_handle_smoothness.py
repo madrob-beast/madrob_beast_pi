@@ -28,6 +28,12 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
             'value': float(smoothness),
         }, result_file, default_flow_style=False)
 
+    return 0
+
+
+def run_pi(wrench_path, output_folder_path):
+    return performance_indicator({'wrench': wrench_path}, None, output_folder_path, datetime.now())
+
 
 if __name__ == '__main__':
     arg_len = 3
