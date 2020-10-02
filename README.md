@@ -8,10 +8,28 @@ Pip can be used to install this module locally:
 ```
 git clone https://github.com/madrob-beast/madrob_beast_pi.git
 cd madrob_beast_pi
-python -m pip install src/madrob_beast_pi/
+virtualenv -p /usr/bin/python2.7 venv
+source venv/bin/activate
+#python -m pip install src/madrob_beast_pi/
+pip install -e src/madrob_beast_pi
 ```
 
+Using the virtual environment, the package and dependencies is installed locally in the folder `venv`.
+To desactivate the virtual environment, type `deactivate`.
+
+To install permanently the code, only use the last command.
+
 **Note**: When adding or modifying Performance Indicators, run the installation command again. To keep the PIs up-to-date, run `git pull` and the installation command.
+
+## Usage
+
+### Madrob
+
+All PI associated to madrob can be launched using (Assuming folder `out_tests` exists):
+
+```term
+run_madrob tests/madrob/input/events.csv tests/madrob/input/wrench.csv tests/madrob/input/jointState.csv tests/madrob/input/testbed_config.yaml out_tests
+```
 
 ## Docker
 
