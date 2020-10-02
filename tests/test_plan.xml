@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<test_plan>
+
+    <test pi_name="./run_pi_capability_level"
+          parameters="/in/events.csv /in/testbed_config.yaml /out"
+          input_folder="madrob/input"
+          output_folder="madrob/output"/>
+
+    <test pi_name="./run_pi_door_handle_smoothness"
+          parameters="/in/wrench.csv /out"
+          input_folder="madrob/input"
+          output_folder="madrob/output"/>
+
+    <test pi_name="./run_pi_door_occupation_time"
+          parameters="/in/events.csv /in/testbed_config.yaml /out"
+          input_folder="madrob/input"
+          output_folder="madrob/output"/>
+
+    <test pi_name="./run_pi_execution_time"
+          parameters="/in/events.csv /in/testbed_config.yaml /out"
+          input_folder="madrob/input"
+          output_folder="madrob/output"/>
+
+    <test pi_name="./run_pi_passage_time"
+          parameters="/in/events.csv /in/testbed_config.yaml /out"
+          input_folder="madrob/input"
+          output_folder="madrob/output"/>
+
+    <test pi_name="./run_pi_roughness_of_door_actuation"
+          parameters="/in/wrench.csv /out"
+          input_folder="madrob/input"
+          output_folder="madrob/output"/>
+
+    <test pi_name="./run_pi_smoothness_of_door_actuation"
+          parameters="/in/jointState.csv /out"
+          input_folder="madrob/input"
+          output_folder="madrob/output"/>
+
+    <test pi_name="./run_pi_time_to_handle"
+          parameters="/in/events.csv /out"
+          input_folder="madrob/input"
+          output_folder="madrob/output"/>
+
+    <test pi_name="./run_pi_unsafety_of_door_operation"
+          parameters="/in/jointState.csv /out"
+          input_folder="madrob/input"
+          output_folder="madrob/output"/>
+
+</test_plan>
