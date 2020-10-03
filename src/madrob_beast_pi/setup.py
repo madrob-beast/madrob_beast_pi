@@ -14,7 +14,7 @@ setuptools.setup(
         'Operating System :: OS Independent',
     ],
     python_requires='>=2.7.12',
-    scripts=['script/run_madrob'],
+    scripts=['script/run_madrob', 'script/run_beast'],
     install_requires=[
         'pyyaml==5.3',
         'numpy==1.16.6',
