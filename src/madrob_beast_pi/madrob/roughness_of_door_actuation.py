@@ -30,6 +30,11 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
         }, result_file, default_flow_style=False)
 
 
+def run_pi(wrench_path, output_folder_path):
+    performance_indicator({'wrench': wrench_path}, None, output_folder_path, datetime.now())
+    return 0
+
+
 if __name__ == '__main__':
     arg_len = 3
     script_name = 'roughness_of_door_actuation'
@@ -38,4 +43,4 @@ if __name__ == '__main__':
         exit(-1)
 
     wrench_path, output_folder_path = argv[1:]
-    performance_indicator({'wrench': wrench_path}, None, output_folder_path, datetime.now())
+    run_pi(wrench_path, output_folder_path)

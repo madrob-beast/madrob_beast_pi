@@ -48,6 +48,14 @@ def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir,
         }, result_file, default_flow_style=False)
 
 
+def run_pi(events_path, testbed_conf_path, output_folder_path):
+    with open(testbed_conf_path, 'r') as testbed_conf_file:
+        testbed_conf_dict = yaml.safe_load(testbed_conf_file)
+
+    performance_indicator({'events': events_path}, testbed_conf_dict, output_folder_path, datetime.now())
+    return 0
+
+
 if __name__ == '__main__':
     arg_len = 4
     script_name = 'passage_time'
@@ -57,7 +65,4 @@ if __name__ == '__main__':
 
     events_path, testbed_conf_path, output_folder_path = argv[1:]
 
-    with open(testbed_conf_path, 'r') as testbed_conf_file:
-        testbed_conf_dict = yaml.safe_load(testbed_conf_file)
-
-    performance_indicator({'events': events_path}, testbed_conf_dict, output_folder_path, datetime.now())
+    run_pi(events_path, testbed_conf_path, output_folder_path)

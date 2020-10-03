@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 # coding=utf-8
 
 import yaml
@@ -52,7 +52,16 @@ def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir,
         }, result_file, default_flow_style=False)
 
 
-if __name__ == '__main__':
+def run_pi(events_path, testbed_conf_path, output_folder_path):
+
+    with open(testbed_conf_path, 'r') as testbed_conf_file:
+        testbed_conf_dict = yaml.safe_load(testbed_conf_file)
+
+    performance_indicator({'events': events_path}, testbed_conf_dict, output_folder_path, datetime.now())
+    return 0
+
+
+def main ():
     arg_len = 4
     script_name = 'capability_level'
     if len(argv) != arg_len:
@@ -61,7 +70,8 @@ if __name__ == '__main__':
 
     events_path, testbed_conf_path, output_folder_path = argv[1:]
 
-    with open(testbed_conf_path, 'r') as testbed_conf_file:
-        testbed_conf_dict = yaml.safe_load(testbed_conf_file)
+    return run_pi(events_path, testbed_conf_path, output_folder_path)
 
-    performance_indicator({'events': events_path}, testbed_conf_dict, output_folder_path, datetime.now())
+
+if __name__ == '__main__':
+    main()
