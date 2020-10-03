@@ -11,7 +11,6 @@ from madrob import smoothness_of_door_actuation
 from madrob import time_to_handle
 from madrob import unsafety_of_door_operation
 
-
 USAGE = """usage: madrob events.csv wrench.csv joint_state.csv testbed_config.yaml output_dir
 events.csv: TOBEDEFINED
 wrench.csv: TOBEDEFINED
@@ -19,63 +18,61 @@ joint_state.csv: TOBEDEFINED
 testbed_config.yaml: TOBEDEFINED
 """
 
-
 if __name__ == '__main__':
 
-    print "MADROB PI compuation"
+    print "MADROB PI computation"
 
     arg_len = 6
     if len(sys.argv) != arg_len:
         print USAGE
         sys.exit(-1)
 
-    print "Runing pi capability level"
+    print "Running pi capability level"
     events_path, wrench_path, joint_state_path, testbed_conf_path, output_folder_path = sys.argv[1:]
 
     is_ok = capability_level.run_pi(events_path, testbed_conf_path, output_folder_path)
     if not is_ok == 0:
         sys.exit(is_ok)
 
-    print "Runing pi door_handle_smoothness"
+    print "Running pi door_handle_smoothness"
     is_ok = door_handle_smoothness.run_pi(wrench_path, output_folder_path)
-    if (not is_ok == 0):
+    if not is_ok == 0:
         sys.exit(is_ok)
 
-    print "Runing pi door_occupation_time"
+    print "Running pi door_occupation_time"
     is_ok = door_occupation_time.run_pi(events_path, testbed_conf_path, output_folder_path)
     if not is_ok == 0:
         sys.exit(is_ok)
 
-    print "Runing pi execution_time"
+    print "Running pi execution_time"
     is_ok = execution_time.run_pi(events_path, testbed_conf_path, output_folder_path)
     if not is_ok == 0:
         sys.exit(is_ok)
 
-    print "Runing pi passage_time"
+    print "Running pi passage_time"
     is_ok = passage_time.run_pi(events_path, testbed_conf_path, output_folder_path)
     if not is_ok == 0:
         sys.exit(is_ok)
 
-    print "Runing pi roughness_of_door_actuation"
+    print "Running pi roughness_of_door_actuation"
     is_ok = roughness_of_door_actuation.run_pi(wrench_path, output_folder_path)
-    if (not is_ok == 0):
+    if not is_ok == 0:
         sys.exit(is_ok)
 
-    print "Runing pi smoothness_of_door_actuation"
+    print "Running pi smoothness_of_door_actuation"
     is_ok = smoothness_of_door_actuation.run_pi(joint_state_path, output_folder_path)
-    if (not is_ok == 0):
+    if not is_ok == 0:
         sys.exit(is_ok)
 
-    print "Runing pi time_to_handle"
+    print "Running pi time_to_handle"
     is_ok = time_to_handle.run_pi(events_path, output_folder_path)
-    if (not is_ok == 0):
+    if not is_ok == 0:
         sys.exit(is_ok)
 
-    print "Runing pi smoothness_of_door_actuation"
+    print "Running pi smoothness_of_door_actuation"
     is_ok = unsafety_of_door_operation.run_pi(joint_state_path, output_folder_path)
-    if (not is_ok == 0):
+    if not is_ok == 0:
         sys.exit(is_ok)
-
 
     print "All computation done"
     sys.exit(0)
