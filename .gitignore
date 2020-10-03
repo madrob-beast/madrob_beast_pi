@@ -1,2 +1,3 @@
 .vscode
-*.pyc
+*.pycsrc/madrob_beast_pi/madrob_beast_pi.egg-info/
+venv
