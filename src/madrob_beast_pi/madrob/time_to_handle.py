@@ -23,7 +23,7 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
         time_to_handle = float(handle_is_touched['time']) - float(events_df.loc[events_df['event'] == 'benchmark_start']['time'])
 
     # Write result yaml file
-    filepath = path.join(output_dir, 'time_to_handle_%s.yaml' % (start_time.strftime('%Y%m%d_%H%M%S')))
+    filepath = path.join(output_dir, 'time_to_handle.yaml')
     with open(filepath, 'w+') as result_file:
         yaml.dump({
             'type': 'scalar',

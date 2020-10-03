@@ -37,7 +37,7 @@ def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir,
                 door_occupation_time = float(robot_moves_to_dest['time']) - float(robot_approach['time'])
 
     # Write result yaml file
-    filepath = path.join(output_dir, 'door_occupation_time_%s.yaml' % (start_time.strftime('%Y%m%d_%H%M%S')))
+    filepath = path.join(output_dir, 'door_occupation_time.yaml')
     with open(filepath, 'w+') as result_file:
         yaml.dump({
             'type': 'scalar',

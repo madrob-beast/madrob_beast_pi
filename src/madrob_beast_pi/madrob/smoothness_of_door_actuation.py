@@ -22,7 +22,7 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
     smoothness_of_door_actuation = float(100. / np.sqrt(np.sum(a ** 2)))
 
     # Write result yaml file
-    filepath = path.join(output_dir, 'smoothness_of_door_actuation_%s.yaml' % (start_time.strftime('%Y%m%d_%H%M%S')))
+    filepath = path.join(output_dir, 'smoothness_of_door_actuation.yaml')
     with open(filepath, 'w+') as result_file:
         yaml.dump({
             'type': 'scalar',

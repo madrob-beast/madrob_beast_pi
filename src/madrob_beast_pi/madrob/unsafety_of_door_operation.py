@@ -41,7 +41,7 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
     unsafety_of_door_operation = float(np.max(np.abs(acceleration_lpf)))
 
     # Write result yaml file
-    filepath = path.join(output_dir, 'unsafety_of_door_operation_%s.yaml' % (start_time.strftime('%Y%m%d_%H%M%S')))
+    filepath = path.join(output_dir, 'unsafety_of_door_operation.yaml')
     with open(filepath, 'w+') as result_file:
         yaml.dump({
             'type': 'scalar',

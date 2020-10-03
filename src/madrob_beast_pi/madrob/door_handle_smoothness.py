@@ -21,7 +21,7 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
     smoothness = 100. / (force_delta_sum/len(wrench_df))  # Higher smoothness = lower force deltas
 
     # Write result yaml file
-    filepath = path.join(output_dir, 'door_handle_smoothness_%s.yaml' % (start_time.strftime('%Y%m%d_%H%M%S')))
+    filepath = path.join(output_dir, 'door_handle_smoothness.yaml')
     with open(filepath, 'w+') as result_file:
         yaml.dump({
             'type': 'scalar',

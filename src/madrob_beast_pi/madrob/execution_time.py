@@ -35,7 +35,7 @@ def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir,
                 execution_time = float(last_door_close['time']) - float(events_df.loc[events_df['event'] == 'benchmark_start']['time'])
 
     # Write result yaml file
-    filepath = path.join(output_dir, 'execution_time_%s.yaml' % (start_time.strftime('%Y%m%d_%H%M%S')))
+    filepath = path.join(output_dir, 'execution_time.yaml')
     with open(filepath, 'w+') as result_file:
         yaml.dump({
             'type': 'scalar',

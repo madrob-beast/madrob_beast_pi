@@ -44,7 +44,7 @@ def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir,
         capability_level += 1
 
     # Write result yaml file
-    filepath = path.join(output_dir, 'capability_level_%s.yaml' % (start_time.strftime('%Y%m%d_%H%M%S')))
+    filepath = path.join(output_dir, 'capability_level.yaml')
     with open(filepath, 'w+') as result_file:
         yaml.dump({
             'type': 'scalar',
