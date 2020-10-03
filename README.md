@@ -1,7 +1,39 @@
 MADROB-BEAST Performance Indicators
 =================================================
 
+## Purposes
+
 Scripts to calculate performance indicators for the MADROB and BEAST benchmarks, from the Eurobench project.
+Two algorithms have been implemented: `pi_bullet_walking` and `pi_bullet_walkingComplete`.
+
+### Madrob PIs
+
+The following PIs are implemented:
+
+- `capability_level`
+- `door_occupation_time`
+- `roughness_of_door_actuation`
+- `time_to_handle`
+- `door_handle_smoothness`
+- `execution_time`
+- `passage_time`
+- `smoothness_of_door_actuation`
+- `unsafety_of_door_operation`
+
+Each PI writes the result to a `yaml` file with the same name of the PI.
+Example: The `capability_level` PI write the results to `capability_level.yaml`.
+
+The PIs require the testbed config file `testbed_config.yaml` and the following preprocessed data files:
+
+- `events.csv`
+- `jointState.csv`
+- `wrench.csv`
+
+
+### Beast PIs
+
+The Beast PIs are not available yet
+
 
 ## Installing the library
 
