@@ -6,10 +6,10 @@
           parameters="/in/events.csv /in/wrench.csv /in/jointState.csv /in/testbed_config.yaml /out"
           input_folder="madrob/input"
           output_folder="madrob/output"/>
-
+<!--
     <test pi_name="run_beast"
           parameters="/in/wrench.csv /out"
           input_folder="beast/input"
           output_folder="beast/output"/>
-
+-->
 </test_plan>
