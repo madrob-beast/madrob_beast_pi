@@ -1,0 +1,44 @@
+name: push on master
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+#    - name: Check secret available
+#      env:
+#        SECRET_DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+#        SECRET_DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+#      run: |
+#        if [[ -z "$SECRET_DOCKERHUB_PASSWORD" ]]; then
+#          echo "Missing variable SECRET_DOCKERHUB_PASSWORD"
+#          exit 1
+#        fi
+#        if [[ -z "$SECRET_DOCKERHUB_USERNAME" ]]; then
+#          echo "Missing variable SECRET_DOCKERHUB_USERNAME"
+#          exit 1
+#        fi
+#    - name: Login to DockerHub Registry
+#      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Build the Docker image
+      env:
+        REPO_NAME: ${{ github.event.repository.name }}
+      run: docker build . --file Dockerfile --tag eurobenchtest/$REPO_NAME:latest
+    - name: Get the docker image testing material
+      run:  wget -O test_docker_call.py https://raw.githubusercontent.com/eurobench/docker_test/master/test_docker_call.py
+    - name: test the Docker image
+      env:
+        TEST_PLAN: tests/test_plan.xml
+        DOCKER_IMAGE: eurobenchtest/${{ github.event.repository.name }}:latest
+      run:  python3 test_docker_call.py
+#    - name: Push to Docker hub
+#      env:
+#        REPO_NAME: ${{ github.event.repository.name }}
+#      run: docker push eurobenchtest/$REPO_NAME:latest
