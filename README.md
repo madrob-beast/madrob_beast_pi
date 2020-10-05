@@ -73,16 +73,10 @@ run_beast tests/madrob/input/wrench.csv tests/madrob/input/testbed_config.yaml o
 
 ## Build docker image
 
-The Dockerfile in this project can be used to build Docker images for madrob and beast:
+The Dockerfile in this project can be used to build the Docker image for madrob and beast:
 
-### Madrob
 ```term
-docker build -t=pi_madrob .
-```
-
-### Beast
-```term
-docker build -t=pi_beast .
+docker build -t=pi_madrob_beast .
 ```
 
 ## Launch the docker image
@@ -91,14 +85,14 @@ docker build -t=pi_beast .
 Assuming the tests/madrob/input contains the input data, the PI output will be written to out_tests:
 
 ```term
-docker run --rm -v $PWD/tests/madrob/input:/in -v $PWD/out_tests:/out pi_madrob run_madrob /in/events.csv /in/wrench.csv /in/jointState.csv /in/testbed_config.yaml /out
+docker run --rm -v $PWD/tests/madrob/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_madrob /in/events.csv /in/wrench.csv /in/jointState.csv /in/testbed_config.yaml /out
 ```
 
 ### Beast
 Assuming the tests/beast/input contains the input data, the PI output will be written to out_tests:
 
 ```term
-docker run --rm -v $PWD/tests/beast/input:/in -v $PWD/out_tests:/out pi_beast run_beast /in/wrench.csv /out
+docker run --rm -v $PWD/tests/beast/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_beast /in/wrench.csv /out
 ```
 
 <!-- TODO update beast -->
