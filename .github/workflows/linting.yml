@@ -1,0 +1,52 @@
+name: linting_check
+
+on: [push]
+
+jobs:
+  yaml-linting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install yamllint
+      - name: yaml linting
+        # see https://yamllint.readthedocs.io/en/stable/configuration.html
+        run: |
+          success=0
+          for i in `find tests -name "*.yaml" -type f`; do
+            echo "Processing $i"
+            yamllint -d relaxed $i
+            res=$?
+            success=$((res+success))
+          done
+          exit $success
+  csv-linting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # see https://github.com/Clever/csvlint
+      - name: install dependencies
+        run: |
+          wget -O csvlint-v0.2.0-linux-amd64.tar.gz https://github.com/Clever/csvlint/releases/download/0.2.0/csvlint-v0.2.0-linux-amd64.tar.gz
+          tar -xzf csvlint-v0.2.0-linux-amd64.tar.gz
+          cp csvlint-v0.2.0-linux-amd64/csvlint .
+      - name: csv linting
+        run: |
+          res=0
+          for i in `find . -name "*.csv" -type f`; do
+              echo "Processing $i"
+              ./csvlint "$i"
+              oneres=$?
+              echo "Resultat: $oneres"
+              res=$((res+oneres))
+          done
+          exit $res
