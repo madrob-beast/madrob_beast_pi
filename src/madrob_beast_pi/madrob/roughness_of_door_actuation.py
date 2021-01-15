@@ -16,6 +16,7 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
     df = pd.read_csv(preprocessed_filenames_dict['wrench'], skipinitialspace=True)
 
     # Handle force timeseries
+    df['time'] = df['time'] - df['time'].iloc[0]
     f = df['force_x']
 
     # Compute result (note: the values in f are broadcasted, see google.com/search?q=numpy+broadcasting)

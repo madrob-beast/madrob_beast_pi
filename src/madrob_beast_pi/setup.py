@@ -6,7 +6,7 @@ setuptools.setup(
     author='João Pereira',
     author_email='95joaopereira@gmail.com',
     description='Performance indicators for the MADROB and BEAST benchmarks',
-    url='https://github.com/joaomacp/madrob_beast_pi',
+    url='https://github.com/madrob-beast/madrob_beast_pi',
     packages=setuptools.find_packages(),
     classifiers=[
         'Programming Language :: Python :: 2',

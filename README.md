@@ -14,7 +14,6 @@ The following PIs are implemented:
 - `door_occupation_time`
 - `roughness_of_door_actuation`
 - `time_to_handle`
-- `door_handle_smoothness`
 - `execution_time`
 - `passage_time`
 - `smoothness_of_door_actuation`
