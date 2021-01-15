@@ -2,7 +2,6 @@
 
 import sys
 from madrob import capability_level
-from madrob import door_handle_smoothness
 from madrob import door_occupation_time
 from madrob import execution_time
 from madrob import passage_time
@@ -29,13 +28,8 @@ if __name__ == '__main__':
 
     events_path, wrench_path, joint_state_path, testbed_conf_path, output_folder_path = sys.argv[1:]
 
-    print "Running pi capability level"
+    print "Running pi capability_level"
     is_ok = capability_level.run_pi(events_path, testbed_conf_path, output_folder_path)
-    if not is_ok == 0:
-        sys.exit(is_ok)
-
-    print "Running pi door_handle_smoothness"
-    is_ok = door_handle_smoothness.run_pi(wrench_path, output_folder_path)
     if not is_ok == 0:
         sys.exit(is_ok)
 
@@ -69,7 +63,7 @@ if __name__ == '__main__':
     if not is_ok == 0:
         sys.exit(is_ok)
 
-    print "Running pi smoothness_of_door_actuation"
+    print "Running pi unsafety_of_door_operation"
     is_ok = unsafety_of_door_operation.run_pi(joint_state_path, output_folder_path)
     if not is_ok == 0:
         sys.exit(is_ok)

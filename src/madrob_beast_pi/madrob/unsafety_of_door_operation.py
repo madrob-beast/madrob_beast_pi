@@ -20,9 +20,10 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
     # Load csv as pandas DataFrame
     df = pd.read_csv(preprocessed_filenames_dict['jointState'], skipinitialspace=True)
 
-    acceleration = df['acceleration'][df['acceleration'].notnull()]
-
-    delta = (df['time'][df.index[-1]] - df['time'][0]) / (len(df['time']) - 1)
+    df = df[df['acceleration'].notnull()]
+    acceleration = df['acceleration']
+    df['time'] = df['time'] - df['time'].iloc[0]
+    delta = (df['time'] - df['time'].shift(1)).mean()
 
     # Low-pass filter
     nyquist_frequency = 1./delta/2

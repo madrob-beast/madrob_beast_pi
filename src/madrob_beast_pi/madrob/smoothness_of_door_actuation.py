@@ -15,11 +15,10 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
     # Load csv as pandas DataFrame
     df = pd.read_csv(preprocessed_filenames_dict['jointState'], skipinitialspace=True)
 
-    # Handle force timeseries
-    a = df['acceleration']
+    df = df[df['position'].abs() > 0.03]
+    j = (df['acceleration'] - df['acceleration'].shift(1))/(df['time'] - df['time'].shift(1))
 
-    # Compute result (note: the values in a are broadcasted, see google.com/search?q=numpy+broadcasting)
-    smoothness_of_door_actuation = float(100. / np.sqrt(np.sum(a ** 2)))
+    smoothness_of_door_actuation = float(10./np.mean(np.abs(j)))
 
     # Write result yaml file
     filepath = path.join(output_dir, 'smoothness_of_door_actuation.yaml')
