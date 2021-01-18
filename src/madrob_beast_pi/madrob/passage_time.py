@@ -15,7 +15,7 @@ def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir,
 
     events_df = pd.read_csv(preprocessed_filenames_dict['events'], skipinitialspace=True)
 
-    if testbed_conf['Robot approach side'] == 'CW':
+    if testbed_conf['robot_approach_side'] == 'CW':
         destination_side = 'ccw'
     else:
         destination_side = 'cw'
@@ -25,19 +25,12 @@ def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir,
     if len(door_closes_events) > 0:
         last_door_close = door_closes_events.iloc[-1]
 
-        # Check if the robot has moved to the destination side
-        robot_moves_to_dest_events = events_df.loc[events_df['event'] == 'humanoid_moves_to_{}_side'.format(destination_side)]
-        if len(robot_moves_to_dest_events) > 0:
-            robot_moves_to_dest = robot_moves_to_dest_events.iloc[0]
+        # Finally, check if the 'handle_is_touched' event exists
+        handle_is_touched_events = events_df.loc[events_df['event'] == 'handle_is_touched']
+        if len(handle_is_touched_events) > 0:
+            first_handle_touch = handle_is_touched_events.iloc[0]
 
-            # Check if the last door closing event occurs after the robot moves to destination
-            if last_door_close['time'] > robot_moves_to_dest['time']:
-                # Finally, check if the 'handle_is_touched' event exists
-                handle_is_touched_events = events_df.loc[events_df['event'] == 'handle_is_touched']
-                if len(handle_is_touched_events) > 0:
-                    first_handle_touch = handle_is_touched_events.iloc[0]
-
-                    passage_time = float(last_door_close['time']) - float(first_handle_touch['time'])
+            passage_time = float(last_door_close['time']) - float(first_handle_touch['time'])
 
     # Write result yaml file
     filepath = path.join(output_dir, 'passage_time.yaml')

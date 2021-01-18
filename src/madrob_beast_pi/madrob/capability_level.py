@@ -16,7 +16,7 @@ def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir,
 
     events_df = pd.read_csv(preprocessed_filenames_dict['events'], skipinitialspace=True)
 
-    if testbed_conf['Robot approach side'] == 'CW':
+    if testbed_conf['robot_approach_side'] == 'CW':
         approach_side = 'cw'
         destination_side = 'ccw'
     else:
