@@ -1,5 +1,5 @@
 time,event
-1580487388.0,benchmark_start
+1580487388.2376215,benchmark_start
 1580487390.2022965,handle_is_touched
 1580487396.141292,door_opens
 1580487400.015743,humanoid_approaches_the_door_on_ccw_side
