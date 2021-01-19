@@ -10,11 +10,11 @@ from madrob import smoothness_of_door_actuation
 from madrob import time_to_handle
 from madrob import unsafety_of_door_operation
 
-USAGE = """usage: madrob events.csv wrench.csv joint_state.csv testbed_config.yaml output_dir
-events.csv: TOBEDEFINED
+USAGE = """usage: madrob event.csv wrench.csv joint_state.csv condition.yaml output_dir
+event.csv: TOBEDEFINED
 wrench.csv: TOBEDEFINED
 joint_state.csv: TOBEDEFINED
-testbed_config.yaml: TOBEDEFINED
+condition.yaml: TOBEDEFINED
 """
 
 if __name__ == '__main__':
@@ -26,25 +26,25 @@ if __name__ == '__main__':
         print USAGE
         sys.exit(-1)
 
-    events_path, wrench_path, joint_state_path, testbed_conf_path, output_folder_path = sys.argv[1:]
+    event_path, wrench_path, joint_state_path, condition_path, output_folder_path = sys.argv[1:]
 
     print "Running pi capability_level"
-    is_ok = capability_level.run_pi(events_path, testbed_conf_path, output_folder_path)
+    is_ok = capability_level.run_pi(event_path, condition_path, output_folder_path)
     if not is_ok == 0:
         sys.exit(is_ok)
 
     print "Running pi door_occupation_time"
-    is_ok = door_occupation_time.run_pi(events_path, testbed_conf_path, output_folder_path)
+    is_ok = door_occupation_time.run_pi(event_path, condition_path, output_folder_path)
     if not is_ok == 0:
         sys.exit(is_ok)
 
     print "Running pi execution_time"
-    is_ok = execution_time.run_pi(events_path, testbed_conf_path, output_folder_path)
+    is_ok = execution_time.run_pi(event_path, condition_path, output_folder_path)
     if not is_ok == 0:
         sys.exit(is_ok)
 
     print "Running pi passage_time"
-    is_ok = passage_time.run_pi(events_path, testbed_conf_path, output_folder_path)
+    is_ok = passage_time.run_pi(event_path, condition_path, output_folder_path)
     if not is_ok == 0:
         sys.exit(is_ok)
 
@@ -59,7 +59,7 @@ if __name__ == '__main__':
         sys.exit(is_ok)
 
     print "Running pi time_to_handle"
-    is_ok = time_to_handle.run_pi(events_path, output_folder_path)
+    is_ok = time_to_handle.run_pi(event_path, output_folder_path)
     if not is_ok == 0:
         sys.exit(is_ok)
 

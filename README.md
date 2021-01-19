@@ -22,9 +22,9 @@ The following PIs are implemented:
 Each PI writes the result to a `yaml` file with the same name of the PI.
 Example: The `capability_level` PI write the results to `capability_level.yaml`.
 
-The PIs require the testbed config file `testbed_config.yaml` and the following preprocessed data files:
+The PIs require the condition file `condition.yaml` and the following preprocessed data files:
 
-- `events.csv`
+- `event.csv`
 - `jointState.csv`
 - `wrench.csv`
 
@@ -59,13 +59,13 @@ To keep the PIs up-to-date, run `git pull` and the installation command.
 All PI associated to madrob can be launched using (assuming folder `out_tests` exists):
 
 ```term
-run_madrob tests/madrob/input/events.csv tests/madrob/input/wrench.csv tests/madrob/input/jointState.csv tests/madrob/input/testbed_config.yaml out_tests
+run_madrob tests/madrob/input/event.csv tests/madrob/input/wrench.csv tests/madrob/input/jointState.csv tests/madrob/input/condition.yaml out_tests
 ```
 
 All PI associated to beast can be launched using (assuming folder `out_tests` exists):
 
 ```term
-run_beast tests/madrob/input/wrench.csv tests/madrob/input/testbed_config.yaml out_tests
+run_beast tests/madrob/input/wrench.csv tests/madrob/input/condition.yaml out_tests
 ```
 
 <!-- TODO update beast -->
@@ -84,7 +84,7 @@ docker build -t=pi_madrob_beast .
 Assuming the tests/madrob/input contains the input data, the PI output will be written to out_tests:
 
 ```term
-docker run --rm -v $PWD/tests/madrob/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_madrob /in/events.csv /in/wrench.csv /in/jointState.csv /in/testbed_config.yaml /out
+docker run --rm -v $PWD/tests/madrob/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_madrob /in/event.csv /in/wrench.csv /in/jointState.csv /in/condition.yaml /out
 ```
 
 ### Beast
@@ -98,7 +98,7 @@ docker run --rm -v $PWD/tests/beast/input:/in -v $PWD/out_tests:/out pi_madrob_b
 
 ## Test data
 
-The [tests/madrob/input](tests/madrob/input) directory contains preprocessed `.csv` files and a testbed configuration `.yaml` file.
+The [tests/madrob/input](tests/madrob/input) directory contains preprocessed `.csv` files and a condition `.yaml` file.
 The [tests/madrob/output](tests/madrob/output) directory contains the pi output `.yaml` file.
 These files are from a real benchmark run, and can be used to test the `run_pi` command and Docker images.
 
