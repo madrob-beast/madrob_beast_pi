@@ -13,7 +13,7 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
 
     time_to_handle = 'TIMEOUT'
 
-    events_df = pd.read_csv(preprocessed_filenames_dict['events'], skipinitialspace=True)
+    events_df = pd.read_csv(preprocessed_filenames_dict['event'], skipinitialspace=True)
 
     # Check if there's a 'handle_is_touched' event
     handle_is_touched_events = events_df.loc[events_df['event'] == 'handle_is_touched']
@@ -31,8 +31,8 @@ def performance_indicator(preprocessed_filenames_dict, _, output_dir, start_time
         }, result_file, default_flow_style=False)
 
 
-def run_pi(events_path, output_folder_path):
-    performance_indicator({'events': events_path}, None, output_folder_path, datetime.now())
+def run_pi(event_path, output_folder_path):
+    performance_indicator({'event': event_path}, None, output_folder_path, datetime.now())
     return 0
 
 
@@ -40,8 +40,8 @@ if __name__ == '__main__':
     arg_len = 3
     script_name = 'time_to_handle'
     if len(argv) != arg_len:
-        print "[Performance Indicator {script_name}] Error: arguments must be {script_name}.py events.csv output_dir".format(script_name=script_name)
+        print "[Performance Indicator {script_name}] Error: arguments must be {script_name}.py event.csv output_dir".format(script_name=script_name)
         exit(-1)
 
-    events_path, output_folder_path = argv[1:]
-    run_pi(events_path, output_folder_path)
+    event_path, output_folder_path = argv[1:]
+    run_pi(event_path, output_folder_path)

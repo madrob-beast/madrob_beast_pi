@@ -9,13 +9,13 @@ from datetime import datetime
 import pandas as pd
 
 
-def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir, start_time):
+def performance_indicator(preprocessed_filenames_dict, condition, output_dir, start_time):
 
     execution_time = 'TIMEOUT'
 
-    events_df = pd.read_csv(preprocessed_filenames_dict['events'], skipinitialspace=True)
+    events_df = pd.read_csv(preprocessed_filenames_dict['event'], skipinitialspace=True)
 
-    if testbed_conf['Robot approach side'] == 'CW':
+    if condition['robot_approach_side'] == 'CW':
         destination_side = 'ccw'
     else:
         destination_side = 'cw'
@@ -24,15 +24,11 @@ def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir,
     door_closes_events = events_df.loc[events_df['event'] == 'door_closes']
     if len(door_closes_events) > 0:
         last_door_close = door_closes_events.iloc[-1]
-
         # Check if the robot has moved to the destination side
         robot_moves_to_dest_events = events_df.loc[events_df['event'] == 'humanoid_moves_to_{}_side'.format(destination_side)]
         if len(robot_moves_to_dest_events) > 0:
             robot_moves_to_dest = robot_moves_to_dest_events.iloc[0]
-
-            # Check if the last door closing event occurs after the robot moves to destination
-            if last_door_close['time'] > robot_moves_to_dest['time']:
-                execution_time = float(last_door_close['time']) - float(events_df.loc[events_df['event'] == 'benchmark_start']['time'])
+            execution_time = float(max(last_door_close['time'], robot_moves_to_dest['time'])) - float(events_df.loc[events_df['event'] == 'benchmark_start']['time'])
 
     # Write result yaml file
     filepath = path.join(output_dir, 'execution_time.yaml')
@@ -43,11 +39,11 @@ def performance_indicator(preprocessed_filenames_dict, testbed_conf, output_dir,
         }, result_file, default_flow_style=False)
 
 
-def run_pi(events_path, testbed_conf_path, output_folder_path):
-    with open(testbed_conf_path, 'r') as testbed_conf_file:
-        testbed_conf_dict = yaml.safe_load(testbed_conf_file)
+def run_pi(event_path, condition_path, output_folder_path):
+    with open(condition_path, 'r') as condition_file:
+        condition_dict = yaml.safe_load(condition_file)
 
-    performance_indicator({'events': events_path}, testbed_conf_dict, output_folder_path, datetime.now())
+    performance_indicator({'event': event_path}, condition_dict, output_folder_path, datetime.now())
     return 0
 
 
@@ -55,9 +51,9 @@ if __name__ == '__main__':
     arg_len = 4
     script_name = 'execution_time'
     if len(argv) != arg_len:
-        print "[Performance Indicator {script_name}] Error: arguments must be {script_name}.py events.csv testbed_config.yaml output_dir".format(script_name=script_name)
+        print "[Performance Indicator {script_name}] Error: arguments must be {script_name}.py event.csv condition.yaml output_dir".format(script_name=script_name)
         exit(-1)
 
-    events_path, testbed_conf_path, output_folder_path = argv[1:]
+    event_path, condition_path, output_folder_path = argv[1:]
 
-    run_pi(events_path, testbed_conf_path, output_folder_path)
+    run_pi(event_path, condition_path, output_folder_path)
