@@ -59,7 +59,7 @@ To keep the PIs up-to-date, run `git pull` and the installation command.
 All PI associated to madrob can be launched using (assuming folder `out_tests` exists):
 
 ```term
-run_madrob tests/madrob/input/event.csv tests/madrob/input/wrench.csv tests/madrob/input/jointState.csv tests/madrob/input/condition.yaml out_tests
+run_madrob tests/madrob/input/subject_001_cond_001_run_001_event.csv tests/madrob/input/subject_001_cond_001_run_001_wrench.csv tests/madrob/input/subject_001_cond_001_run_001_jointState.csv tests/madrob/input/condition_1.yaml out_tests
 ```
 
 All PI associated to beast can be launched using (assuming folder `out_tests` exists):
@@ -70,7 +70,9 @@ run_beast tests/madrob/input/wrench.csv tests/madrob/input/condition.yaml out_te
 
 <!-- TODO update beast -->
 
-## Build docker image
+## Docker image
+
+### Build from source
 
 The Dockerfile in this project can be used to build the Docker image for madrob and beast:
 
@@ -78,16 +80,27 @@ The Dockerfile in this project can be used to build the Docker image for madrob 
 docker build -t=pi_madrob_beast .
 ```
 
-## Launch the docker image
+### Use official image
 
-### Madrob
-Assuming the tests/madrob/input contains the input data, the PI output will be written to out_tests:
+An image is available from the [Docker Hub](https://hub.docker.com/r/eurobenchtest/pi_madrob_beast).
+It can be directly installed on a Linux machine using:
 
 ```term
-docker run --rm -v $PWD/tests/madrob/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_madrob /in/event.csv /in/wrench.csv /in/jointState.csv /in/condition.yaml /out
+docker pull eurobenchtest/pi_madrob_beast
 ```
 
-### Beast
+### Launch the docker image
+
+#### Madrob
+
+Assuming the tests/madrob/input contains the input data, the PI output will be written to `out_tests`:
+
+```term
+docker run --rm -v $PWD/tests/madrob/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_madrob /in/subject_001_cond_001_run_001_event.csv /in/subject_001_cond_001_run_001_wrench.csv /in/subject_001_cond_001_run_001_jointState.csv /in/condition_1.yaml /out
+```
+
+#### Beast
+
 Assuming the tests/beast/input contains the input data, the PI output will be written to out_tests:
 
 ```term
