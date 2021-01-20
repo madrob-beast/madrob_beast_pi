@@ -22,12 +22,16 @@ The following PIs are implemented:
 Each PI writes the result to a `yaml` file with the same name of the PI.
 Example: The `capability_level` PI write the results to `capability_level.yaml`.
 
-The PIs require the condition file `condition.yaml` and the following preprocessed data files:
+The PIs require the condition file `condition_Y.yaml` and the following preprocessed data files:
 
-- `event.csv`
-- `jointState.csv`
-- `wrench.csv`
+- `subject_X_cond_Y_run_Z_event.csv`
+- `subject_X_cond_Y_run_Z_jointState.csv`
+- `subject_X_cond_Y_run_Z_wrench.csv`
 
+`X`, `Y`, `Z` are the subject number, condition number and run number respectively.
+The preprocessed data files are generated during the benchmark execution and are nameed following the specification in [experiment_data](https://github.com/aremazeilles/eurobench_documentation/blob/master/modules/ROOT/pages/experiment_data.adoc#Experimental%20data).
+The preprocessed files and raw data files are collected in a different directory for each run, named `subject_X_cond_Y_run_Z_T`, where T is a timestamp that ensures each run is saved in a different directory.
+Note that files referring to the same condition (e.g., condition_1.yaml) are present in multiple run directories, but have the same content. 
 
 ### Beast PIs
 
