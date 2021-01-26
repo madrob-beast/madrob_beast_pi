@@ -4,8 +4,8 @@ import sys
 from beast import roughness_of_actuation, safety_of_navigation
 
 
-USAGE = """usage: beast range.csv wrench.csv output_dir
-range.csv: TOBEDEFINED
+USAGE = """usage: beast distance.csv wrench.csv output_dir
+distance.csv: TOBEDEFINED
 wrench.csv: TOBEDEFINED
 """
 
@@ -18,7 +18,7 @@ if __name__ == '__main__':
         print USAGE
         sys.exit(-1)
 
-    range_path, wrench_path, output_folder_path = sys.argv[1:]
+    distance_path, wrench_path, output_folder_path = sys.argv[1:]
 
     print "Running pi roughness_of_actuation"
     is_ok = roughness_of_actuation.run_pi(wrench_path, output_folder_path)
@@ -26,7 +26,7 @@ if __name__ == '__main__':
         sys.exit(is_ok)
 
     print "Running pi safety_of_navigation"
-    is_ok = safety_of_navigation.run_pi(range_path, output_folder_path)
+    is_ok = safety_of_navigation.run_pi(distance_path, output_folder_path)
     if not is_ok == 0:
         sys.exit(is_ok)
 

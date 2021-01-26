@@ -32,10 +32,12 @@ The following PIs are implemented:
 - `roughness_of_actuation`
 - `safety_of_navigation`
 
-The PIs require the condition file `condition_Y.yaml` and the following preprocessed data files:
+The PIs require the following preprocessed data files:
 
-- `subject_X_cond_Y_run_Z_range.csv`
+- `subject_X_cond_Y_run_Z_distance.csv`
 - `subject_X_cond_Y_run_Z_wrench.csv`
+
+TODO: add the condition file `condition_Y.yaml` if it turns out to be needed by additional PIs
 
 ### Note on PIs and pre-processed data
 
@@ -118,10 +120,8 @@ docker run --rm -v $PWD/tests/madrob/input:/in -v $PWD/out_tests:/out pi_madrob_
 Assuming the tests/beast/input contains the input data, the PI output will be written to out_tests:
 
 ```term
-docker run --rm -v $PWD/tests/beast/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_beast /in/wrench.csv /out
+docker run --rm -v $PWD/tests/beast/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_beast /in/subject_001_cond_001_run_001_distance.csv /in/subject_001_cond_001_run_001_wrench.csv /out
 ```
-
-<!-- TODO update beast -->
 
 ## Test data
 
