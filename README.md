@@ -11,11 +11,11 @@ Two algorithms have been implemented: `pi_bullet_walking` and `pi_bullet_walking
 The following PIs are implemented:
 
 - `capability_level`
-- `door_occupation_time`
-- `roughness_of_door_actuation`
-- `time_to_handle`
 - `execution_time`
+- `time_to_handle`
+- `door_occupation_time`
 - `passage_time`
+- `roughness_of_door_actuation`
 - `smoothness_of_door_actuation`
 - `unsafety_of_door_operation`
 
@@ -29,15 +29,18 @@ The PIs require the condition file `condition_Y.yaml` and the following preproce
 
 The following PIs are implemented:
 
+- `capability_level`
+- `time_to_grip_handle`
+- `time_to_checkpoint_1..5`
 - `roughness_of_actuation`
 - `safety_of_navigation`
 
-The PIs require the following preprocessed data files:
+The PIs require the condition file `condition_Y.yaml` and the following preprocessed data files:
 
+- `subject_X_cond_Y_run_Z_event.csv`
 - `subject_X_cond_Y_run_Z_distance.csv`
 - `subject_X_cond_Y_run_Z_wrench.csv`
 
-TODO: add the condition file `condition_Y.yaml` if it turns out to be needed by additional PIs
 
 ### Note on PIs and pre-processed data
 
@@ -81,10 +84,9 @@ run_madrob tests/madrob/input/subject_001_cond_001_run_001_event.csv tests/madro
 All PI associated to beast can be launched using (assuming folder `out_tests` exists):
 
 ```term
-run_beast tests/madrob/input/wrench.csv tests/madrob/input/condition.yaml out_tests
+run_beast tests/beast/input/subject_001_cond_001_run_001_event.csv tests/beast/input/subject_001_cond_001_run_001_distance.csv tests/beast/input/subject_001_cond_001_run_001_wrench.csv tests/beast/input/condition_1.yaml out_tests
 ```
-
-<!-- TODO update beast -->
+TODO: collect beast test data and update the names in this example (if using a different condition)
 
 ## Docker image
 
@@ -120,8 +122,9 @@ docker run --rm -v $PWD/tests/madrob/input:/in -v $PWD/out_tests:/out pi_madrob_
 Assuming the tests/beast/input contains the input data, the PI output will be written to out_tests:
 
 ```term
-docker run --rm -v $PWD/tests/beast/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_beast /in/subject_001_cond_001_run_001_distance.csv /in/subject_001_cond_001_run_001_wrench.csv /out
+docker run --rm -v $PWD/tests/beast/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_beast /in/subject_001_cond_001_run_001_event.csv /in/subject_001_cond_001_run_001_distance.csv /in/subject_001_cond_001_run_001_wrench.csv /in/condition_1.yaml /out
 ```
+TODO: collect beast test data and update the names in this example (if using a different condition)
 
 ## Test data
 
@@ -130,7 +133,7 @@ The [tests/madrob/output](tests/madrob/output) directory contains the pi output 
 These files are from a real benchmark run, and can be used to test the `run_pi` command and Docker images.
 
 Beast data is not available yet.
-<!-- TODO update beast -->
+TODO: collect beast test data and update the names in this example (if using a different condition)
 
 ## Acknowledgements
 
