@@ -11,16 +11,13 @@ Two algorithms have been implemented: `pi_bullet_walking` and `pi_bullet_walking
 The following PIs are implemented:
 
 - `capability_level`
-- `door_occupation_time`
-- `roughness_of_door_actuation`
-- `time_to_handle`
 - `execution_time`
+- `time_to_handle`
+- `door_occupation_time`
 - `passage_time`
+- `roughness_of_door_actuation`
 - `smoothness_of_door_actuation`
 - `unsafety_of_door_operation`
-
-Each PI writes the result to a `yaml` file with the same name of the PI.
-Example: The `capability_level` PI write the results to `capability_level.yaml`.
 
 The PIs require the condition file `condition_Y.yaml` and the following preprocessed data files:
 
@@ -28,14 +25,32 @@ The PIs require the condition file `condition_Y.yaml` and the following preproce
 - `subject_X_cond_Y_run_Z_jointState.csv`
 - `subject_X_cond_Y_run_Z_wrench.csv`
 
-`X`, `Y`, `Z` are the subject number, condition number and run number respectively.
-The preprocessed data files are generated during the benchmark execution and are nameed following the specification in [experiment_data](https://github.com/aremazeilles/eurobench_documentation/blob/master/modules/ROOT/pages/experiment_data.adoc#Experimental%20data).
-The preprocessed files and raw data files are collected in a different directory for each run, named `subject_X_cond_Y_run_Z_T`, where T is a timestamp that ensures each run is saved in a different directory.
-Note that files referring to the same condition (e.g., condition_1.yaml) are present in multiple run directories, but have the same content. 
-
 ### Beast PIs
 
-The Beast PIs are not available yet
+The following PIs are implemented:
+
+- `capability_level`
+- `time_to_grip_handle`
+- `time_to_checkpoint_1..5`
+- `roughness_of_actuation`
+- `safety_of_navigation`
+
+The PIs require the condition file `condition_Y.yaml` and the following preprocessed data files:
+
+- `subject_X_cond_Y_run_Z_event.csv`
+- `subject_X_cond_Y_run_Z_distance.csv`
+- `subject_X_cond_Y_run_Z_wrench.csv`
+
+
+### Note on PIs and pre-processed data
+
+Each PI writes the result to a `yaml` file with the same name of the PI.
+Example: The `capability_level` PI write the results to `capability_level.yaml`.
+
+For both Madrob and Beast, `X`, `Y`, `Z` are the subject number, condition number and run number respectively.
+The preprocessed data files are generated during the benchmark execution and are named following the specification in [experiment_data](https://github.com/aremazeilles/eurobench_documentation/blob/master/modules/ROOT/pages/experiment_data.adoc#Experimental%20data).
+The preprocessed files and raw data files are collected in a different directory for each run, named `subject_X_cond_Y_run_Z_T`, where T is a timestamp that ensures each run is saved in a different directory.
+Note that files referring to the same condition (e.g., condition_1.yaml) are present in multiple run directories, but have the same content.
 
 
 ## Installing the library
@@ -69,10 +84,9 @@ run_madrob tests/madrob/input/subject_001_cond_001_run_001_event.csv tests/madro
 All PI associated to beast can be launched using (assuming folder `out_tests` exists):
 
 ```term
-run_beast tests/madrob/input/wrench.csv tests/madrob/input/condition.yaml out_tests
+run_beast tests/beast/input/subject_001_cond_001_run_001_event.csv tests/beast/input/subject_001_cond_001_run_001_distance.csv tests/beast/input/subject_001_cond_001_run_001_wrench.csv tests/beast/input/condition_1.yaml out_tests
 ```
-
-<!-- TODO update beast -->
+TODO: collect beast test data and update the names in this example (if using a different condition)
 
 ## Docker image
 
@@ -108,10 +122,9 @@ docker run --rm -v $PWD/tests/madrob/input:/in -v $PWD/out_tests:/out pi_madrob_
 Assuming the tests/beast/input contains the input data, the PI output will be written to out_tests:
 
 ```term
-docker run --rm -v $PWD/tests/beast/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_beast /in/wrench.csv /out
+docker run --rm -v $PWD/tests/beast/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_beast /in/subject_001_cond_001_run_001_event.csv /in/subject_001_cond_001_run_001_distance.csv /in/subject_001_cond_001_run_001_wrench.csv /in/condition_1.yaml /out
 ```
-
-<!-- TODO update beast -->
+TODO: collect beast test data and update the names in this example (if using a different condition)
 
 ## Test data
 
@@ -120,7 +133,7 @@ The [tests/madrob/output](tests/madrob/output) directory contains the pi output 
 These files are from a real benchmark run, and can be used to test the `run_pi` command and Docker images.
 
 Beast data is not available yet.
-<!-- TODO update beast -->
+TODO: collect beast test data and update the names in this example (if using a different condition)
 
 ## Acknowledgements
 
