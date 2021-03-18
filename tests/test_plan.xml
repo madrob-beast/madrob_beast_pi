@@ -6,10 +6,10 @@
           parameters="/in/subject_001_cond_001_run_001_event.csv /in/subject_001_cond_001_run_001_wrench.csv /in/subject_001_cond_001_run_001_jointState.csv /in/condition_1.yaml /out"
           input_folder="madrob/input"
           output_folder="madrob/output"/>
-<!--
+
     <test pi_name="run_beast"
-          parameters="/in/wrench.csv /out"
+          parameters="/in/subject_001_cond_001_run_001_event.csv /in/subject_001_cond_001_run_001_distance.csv /in/subject_001_cond_001_run_001_wrench.csv /in/condition_1.yaml /out"
           input_folder="beast/input"
           output_folder="beast/output"/>
--->
+
 </test_plan>

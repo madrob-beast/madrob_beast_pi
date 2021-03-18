@@ -86,7 +86,6 @@ All PI associated to beast can be launched using (assuming folder `out_tests` ex
 ```term
 run_beast tests/beast/input/subject_001_cond_001_run_001_event.csv tests/beast/input/subject_001_cond_001_run_001_distance.csv tests/beast/input/subject_001_cond_001_run_001_wrench.csv tests/beast/input/condition_1.yaml out_tests
 ```
-TODO: collect beast test data and update the names in this example (if using a different condition)
 
 ## Docker image
 
@@ -124,16 +123,12 @@ Assuming the tests/beast/input contains the input data, the PI output will be wr
 ```term
 docker run --rm -v $PWD/tests/beast/input:/in -v $PWD/out_tests:/out pi_madrob_beast run_beast /in/subject_001_cond_001_run_001_event.csv /in/subject_001_cond_001_run_001_distance.csv /in/subject_001_cond_001_run_001_wrench.csv /in/condition_1.yaml /out
 ```
-TODO: collect beast test data and update the names in this example (if using a different condition)
 
 ## Test data
 
-The [tests/madrob/input](tests/madrob/input) directory contains preprocessed `.csv` files and a condition `.yaml` file.
-The [tests/madrob/output](tests/madrob/output) directory contains the pi output `.yaml` file.
+The [tests/madrob/input](tests/madrob/input) and [tests/beast/input](tests/beast/input) directories contain preprocessed `.csv` files and a condition `.yaml` file.
+The [tests/madrob/output](tests/madrob/output) and [tests/beast/output](tests/beast/output) directories contain the PIs output `.yaml` files.
 These files are from a real benchmark run, and can be used to test the `run_pi` command and Docker images.
-
-Beast data is not available yet.
-TODO: collect beast test data and update the names in this example (if using a different condition)
 
 ## Acknowledgements
 

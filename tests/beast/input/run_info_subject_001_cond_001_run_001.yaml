@@ -1,0 +1,8 @@
+condition_number: 1
+disturbance_type: No Force
+load: 0.0
+robot_name: '1'
+rosbag_path: subject_001_cond_001_run_001_20210315_161200.bag
+run_number: 1
+start_already_gripping: false
+start_time: 1615821120.581288
