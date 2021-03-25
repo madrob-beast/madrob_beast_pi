@@ -16,7 +16,7 @@ setuptools.setup(
     python_requires='>=2.7.12',
     scripts=['script/run_madrob', 'script/run_beast'],
     install_requires=[
-        'pyyaml==5.3',
+        'pyyaml==5.4',
         'numpy==1.16.6',
         'pandas==0.23.1',
         'scipy==0.16'
